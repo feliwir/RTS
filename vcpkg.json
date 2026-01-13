@@ -9,6 +9,7 @@
     "ffmpeg",
     "zlib",
     "gtest",
+    "openal-soft",
     "benchmark",
     {
       "name": "imgui",
