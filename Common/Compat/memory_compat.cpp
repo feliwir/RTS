@@ -1,6 +1,6 @@
+#ifndef _WIN32
 #include "memory_compat.h"
 
-#if 0 //ndef _WIN32
 #include <dxvk/windows_base.h>
 
 

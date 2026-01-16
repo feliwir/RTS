@@ -2,4 +2,4 @@
 # --------------
 # which folders/files to ignore
 ignore:
-  - */Tests/.*
+  - "*/Tests/.*"

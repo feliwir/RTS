@@ -14,6 +14,11 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            preset: linux64
+          - os: windows-latest
+            preset: win64
       fail-fast: false
       
     steps:
@@ -31,7 +36,6 @@ jobs:
       # Or pin to a specific CMake version:
       # lukka/get-cmake@v3.27
 
-
       - name: Setup anew (or from cache) vcpkg (and does not build any package)
         uses: lukka/run-vcpkg@v11 # Always specify the specific _version_ of the
                                   # action you need, `v11` in this case to stay up
@@ -41,9 +45,9 @@ jobs:
       - name: Run CMake consuming CMakePreset.json and run vcpkg to build packages
         uses: lukka/run-cmake@v10
         with:
-          configurePreset: 'default'
-          buildPreset: 'default'
-          packagePreset: 'zip'
+          configurePreset: '${{ matrix.preset }}'
+          buildPreset: '${{ matrix.preset }}'
+          packagePreset: '${{ matrix.preset }}-zip'
       
       # Publish ZIP archive as artifacts
       - uses: actions/upload-artifact@v4
