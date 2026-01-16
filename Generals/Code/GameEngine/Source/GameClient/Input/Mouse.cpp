@@ -636,7 +636,8 @@ void Mouse::reset( void )
 	///@ todo Write Mouse::reset() if there needs to be anything here
 
 	// reset the text of the cursor text
-	m_cursorTextDisplayString->reset();
+	if( m_cursorTextDisplayString )
+		m_cursorTextDisplayString->reset();
 
 }  // end reset
 

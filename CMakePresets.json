@@ -2,10 +2,11 @@
   "version": 6,
   "configurePresets": [
     {
-      "name": "default",
+      "name": "linux64",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-linux-shared",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "RTS_USE_MILES": "OFF"
       }
@@ -15,6 +16,7 @@
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-linux-dynamic",
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "RTS_USE_MILES": "OFF",
@@ -25,8 +27,8 @@
   ],
   "buildPresets": [
     {
-      "name": "default",
-      "configurePreset": "default",
+      "name": "linux64",
+      "configurePreset": "linux64",
       "configuration": "Release"
     },
     {
@@ -37,15 +39,15 @@
   ],
   "testPresets": [
     {
-      "name": "coverage",
-      "configurePreset": "coverage",
+      "name": "linux64",
+      "configurePreset": "linux64",
       "output": {"outputOnFailure": true}
     }
   ],
   "packagePresets": [
     {
-      "name": "zip",
-      "configurePreset": "default",
+      "name": "linux64-zip",
+      "configurePreset": "linux64",
       "generators": [
         "ZIP"
       ]

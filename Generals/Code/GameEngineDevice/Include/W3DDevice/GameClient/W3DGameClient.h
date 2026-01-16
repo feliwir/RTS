@@ -52,6 +52,9 @@
 #include "Win32Device/GameClient/Win32DIKeyboard.h"
 #include "Win32Device/GameClient/Win32DIMouse.h"
 #endif
+#if defined(RTS_USE_SDL3)
+#include "SDL3Device/GameClient/SDL3Keyboard.h"
+#endif
 #include "Win32Device/GameClient/Win32Mouse.h"
 #include "W3DDevice/GameClient/W3DMouse.h"
 #if defined(RTS_USE_FFMPEG)
@@ -129,7 +132,9 @@ protected:
 
 };  // end class W3DGameClient
 
-#ifdef _WIN32
+#if defined(RTS_USE_SDL3)
+inline Keyboard *W3DGameClient::createKeyboard( void ) { return NEW SDL3Keyboard; }
+#elif defined(_WIN32)
 inline Keyboard *W3DGameClient::createKeyboard( void ) { return NEW DirectInputKeyboard; }
 #else
 inline Keyboard *W3DGameClient::createKeyboard( void ) { return NULL; }

@@ -426,7 +426,7 @@ SDL3Mouse::SDL3Mouse( void )
 	m_currentSdlCursor = NONE;
 	for (Int i=0; i<NUM_MOUSE_CURSORS; i++)
 		for (Int j=0; j<MAX_2D_CURSOR_DIRECTIONS; j++)
-				cursorResources[i][j]= NULL;
+			cursorResources[i][j]= NULL;
 	m_directionFrame=0; //points up.
 	m_lostFocus = FALSE;
 }  // end SDL3Mouse

@@ -19,3 +19,5 @@ endif()
 ### Target configuration
 set_target_properties(g_main PROPERTIES OUTPUT_NAME Generals)
 target_link_libraries(g_main PUBLIC g_gameengine g_gameenginedevice)
+install(TARGETS g_main RUNTIME DESTINATION bin COMPONENT Generals)
+install(FILES $<TARGET_RUNTIME_DLLS:g_main> TYPE BIN)

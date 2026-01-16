@@ -10,6 +10,7 @@ target_sources(c_libraries_compat PRIVATE
     dinput_compat.h
     intrin_compat.h
     memory_compat.h
+    memory_compat.cpp
     string_compat.h
     tchar_compat.h
     time_compat.h
@@ -37,4 +38,5 @@ target_link_libraries(c_libraries_compat PRIVATE glm::glm)
 find_package(gli CONFIG REQUIRED)
 target_link_libraries(c_libraries_compat PRIVATE gli)
 
+target_include_directories(c_libraries_compat PRIVATE ${dxvk_SOURCE_DIR}/include)
 target_include_directories(c_libraries_compat PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}" ${dxvk_SOURCE_DIR}/include/dxvk)

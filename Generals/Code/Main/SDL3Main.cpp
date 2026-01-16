@@ -187,10 +187,14 @@ static Bool initializeAppWindows(Bool runWindowed, Bool runSplash) {
   return true; // success
 }
 
+#include <dlfcn.h>
+
 int main(int argc, char *argv[]) {
 #ifdef _PROFILE
   Profile::StartRange("init");
 #endif
+
+  dlopen("libLLVM.so.20", RTLD_NOW);
 
   // This is similar to WinMain, where it looked up a few cmd line arguments before using the CommandLine module
   // Combine argv into a single string like lpCmdLine

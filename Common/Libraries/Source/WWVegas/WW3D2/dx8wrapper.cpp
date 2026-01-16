@@ -411,6 +411,8 @@ void DX8Wrapper::Do_Onetime_Device_Dependent_Shutdowns(void)
 
 }
 
+#include <SDL3/SDL.h>
+
 
 bool DX8Wrapper::Create_Device(void)
 {
@@ -443,6 +445,10 @@ bool DX8Wrapper::Create_Device(void)
 
 	if (DX8Wrapper_PreserveFPU)
 		vertex_processing_type |= D3DCREATE_FPU_PRESERVE;
+
+	if(!SDL_GetWindowSizeInPixels((SDL_Window*)_Hwnd, &ResolutionWidth, &ResolutionHeight)) {
+		WWDEBUG_SAY(("DX8Wrapper::Create_Device: SDL_GetWindowSizeInPixels failed, using default resolution %dx%d\n", ResolutionWidth, ResolutionHeight));
+	}
 
 	if (FAILED( D3DInterface->CreateDevice(
 		CurRenderDevice,

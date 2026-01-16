@@ -1012,8 +1012,8 @@ void GameClient::allocateShadows(void)
 void GameClient::preloadAssets( TimeOfDay timeOfDay )
 {
 
-	MEMORYSTATUS before, after;
-	GlobalMemoryStatus(&before);
+	MEMORYSTATUSEX before, after;
+	GlobalMemoryStatusEx(&before);
 
 	// first, for every drawable in the map load the assets for all states we care about
 	Drawable *draw;
@@ -1049,14 +1049,14 @@ void GameClient::preloadAssets( TimeOfDay timeOfDay )
 		}  // end if
 
 	}  // end for
-	GlobalMemoryStatus(&after);
+	GlobalMemoryStatusEx(&after);
 
-	DEBUG_LOG(("Preloading memory dwAvailPageFile %d --> %d : %d\n",
-		before.dwAvailPageFile, after.dwAvailPageFile, before.dwAvailPageFile - after.dwAvailPageFile));
-	DEBUG_LOG(("Preloading memory dwAvailPhys     %d --> %d : %d\n",
-		before.dwAvailPhys, after.dwAvailPhys, before.dwAvailPhys - after.dwAvailPhys));
-	DEBUG_LOG(("Preloading memory dwAvailVirtual  %d --> %d : %d\n",
-		before.dwAvailVirtual, after.dwAvailVirtual, before.dwAvailVirtual - after.dwAvailVirtual));
+	DEBUG_LOG(("Preloading memory ullAvailPageFile %d --> %d : %d\n",
+		before.ullAvailPageFile, after.ullAvailPageFile, before.ullAvailPageFile - after.ullAvailPageFile));
+	DEBUG_LOG(("Preloading memory ullAvailPhys     %d --> %d : %d\n",
+		before.ullAvailPhys, after.ullAvailPhys, before.ullAvailPhys - after.ullAvailPhys));
+	DEBUG_LOG(("Preloading memory ullAvailVirtual  %d --> %d : %d\n",
+		before.ullAvailVirtual, after.ullAvailVirtual, before.ullAvailVirtual - after.ullAvailVirtual));
 	/*
 	DEBUG_LOG(("Preloading memory dwLength        %d --> %d : %d\n",
 		before.dwLength, after.dwLength, before.dwLength - after.dwLength));
@@ -1070,34 +1070,34 @@ void GameClient::preloadAssets( TimeOfDay timeOfDay )
 		before.dwTotalVirtual , after.dwTotalVirtual, before.dwTotalVirtual - after.dwTotalVirtual));
 	*/
 
-	GlobalMemoryStatus(&before);
+	GlobalMemoryStatusEx(&before);
 	extern std::vector<AsciiString>	debrisModelNamesGlobalHack;
 	for (Int i=0; i<debrisModelNamesGlobalHack.size(); ++i)
 	{
 		TheDisplay->preloadModelAssets(debrisModelNamesGlobalHack[i]);
 	}
-	GlobalMemoryStatus(&after);
+	GlobalMemoryStatusEx(&after);
 	debrisModelNamesGlobalHack.clear();
 
-	DEBUG_LOG(("Preloading memory dwAvailPageFile %d --> %d : %d\n",
-		before.dwAvailPageFile, after.dwAvailPageFile, before.dwAvailPageFile - after.dwAvailPageFile));
-	DEBUG_LOG(("Preloading memory dwAvailPhys     %d --> %d : %d\n",
-		before.dwAvailPhys, after.dwAvailPhys, before.dwAvailPhys - after.dwAvailPhys));
-	DEBUG_LOG(("Preloading memory dwAvailVirtual  %d --> %d : %d\n",
-		before.dwAvailVirtual, after.dwAvailVirtual, before.dwAvailVirtual - after.dwAvailVirtual));
+	DEBUG_LOG(("Preloading memory ullAvailPageFile %d --> %d : %d\n",
+		before.ullAvailPageFile, after.ullAvailPageFile, before.ullAvailPageFile - after.ullAvailPageFile));
+	DEBUG_LOG(("Preloading memory ullAvailPhys     %d --> %d : %d\n",
+		before.ullAvailPhys, after.ullAvailPhys, before.ullAvailPhys - after.ullAvailPhys));
+	DEBUG_LOG(("Preloading memory ullAvailVirtual  %d --> %d : %d\n",
+		before.ullAvailVirtual, after.ullAvailVirtual, before.ullAvailVirtual - after.ullAvailVirtual));
 
 	TheControlBar->preloadAssets( timeOfDay );
 
-	GlobalMemoryStatus(&before);
+	GlobalMemoryStatusEx(&before);
 	TheParticleSystemManager->preloadAssets( timeOfDay );
-	GlobalMemoryStatus(&after);
+	GlobalMemoryStatusEx(&after);
 
-	DEBUG_LOG(("Preloading memory dwAvailPageFile %d --> %d : %d\n",
-		before.dwAvailPageFile, after.dwAvailPageFile, before.dwAvailPageFile - after.dwAvailPageFile));
-	DEBUG_LOG(("Preloading memory dwAvailPhys     %d --> %d : %d\n",
-		before.dwAvailPhys, after.dwAvailPhys, before.dwAvailPhys - after.dwAvailPhys));
-	DEBUG_LOG(("Preloading memory dwAvailVirtual  %d --> %d : %d\n",
-		before.dwAvailVirtual, after.dwAvailVirtual, before.dwAvailVirtual - after.dwAvailVirtual));
+	DEBUG_LOG(("Preloading memory ullAvailPageFile %d --> %d : %d\n",
+		before.ullAvailPageFile, after.ullAvailPageFile, before.ullAvailPageFile - after.ullAvailPageFile));
+	DEBUG_LOG(("Preloading memory ullAvailPhys     %d --> %d : %d\n",
+		before.ullAvailPhys, after.ullAvailPhys, before.ullAvailPhys - after.ullAvailPhys));
+	DEBUG_LOG(("Preloading memory ullAvailVirtual  %d --> %d : %d\n",
+		before.ullAvailVirtual, after.ullAvailVirtual, before.ullAvailVirtual - after.ullAvailVirtual));
 
 	char *textureNames[] = {
 		"ptspruce01.tga",
@@ -1141,17 +1141,17 @@ void GameClient::preloadAssets( TimeOfDay timeOfDay )
 		""
 	};
 
-	GlobalMemoryStatus(&before);
+	GlobalMemoryStatusEx(&before);
 	for (Int i=0; *textureNames[i]; ++i)
 		TheDisplay->preloadTextureAssets(textureNames[i]);
-	GlobalMemoryStatus(&after);
+	GlobalMemoryStatusEx(&after);
 
-	DEBUG_LOG(("Preloading memory dwAvailPageFile %d --> %d : %d\n",
-		before.dwAvailPageFile, after.dwAvailPageFile, before.dwAvailPageFile - after.dwAvailPageFile));
-	DEBUG_LOG(("Preloading memory dwAvailPhys     %d --> %d : %d\n",
-		before.dwAvailPhys, after.dwAvailPhys, before.dwAvailPhys - after.dwAvailPhys));
-	DEBUG_LOG(("Preloading memory dwAvailVirtual  %d --> %d : %d\n",
-		before.dwAvailVirtual, after.dwAvailVirtual, before.dwAvailVirtual - after.dwAvailVirtual));
+	DEBUG_LOG(("Preloading memory ullAvailPageFile %d --> %d : %d\n",
+		before.ullAvailPageFile, after.ullAvailPageFile, before.ullAvailPageFile - after.ullAvailPageFile));
+	DEBUG_LOG(("Preloading memory ullAvailPhys     %d --> %d : %d\n",
+		before.ullAvailPhys, after.ullAvailPhys, before.ullAvailPhys - after.ullAvailPhys));
+	DEBUG_LOG(("Preloading memory ullAvailVirtual  %d --> %d : %d\n",
+		before.ullAvailVirtual, after.ullAvailVirtual, before.ullAvailVirtual - after.ullAvailVirtual));
 
 //	preloadTextureNamesGlobalHack2 = preloadTextureNamesGlobalHack;
 //	preloadTextureNamesGlobalHack.clear();
